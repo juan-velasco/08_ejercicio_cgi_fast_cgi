@@ -1,0 +1,18 @@
+services:
+  mod-php:
+    build: ./mod_php
+    ports:
+      - "8080:80"
+
+  apache-fast-cgi:
+    build: 
+      context: ./fastcgi_fpm
+      dockerfile: Dockerfile
+    ports:
+      - "8081:80"
+    
+
+# Script para lanzar pruebas de performance
+
+# docker run --rm --add-host php-mod.localhost:172.17.0.1 jordi/ab -n 10000 -c 100 http://php-mod.localhost:8080/
+# docker run --rm --add-host php-fpm.localhost:172.17.0.1 jordi/ab -n 10000 -c 100 http://php-fpm.localhost:8080/
